@@ -8,7 +8,7 @@
            "secretKey": "notValidSecret",
            "region": "eu-west-2",
            "url": "http://localhost:9324/queue/{{.}}"
-        },
+        }{{#unless @last}},{{/unless}}
         {{/queues}}
     ]
 }

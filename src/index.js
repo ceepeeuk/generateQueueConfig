@@ -1,5 +1,5 @@
 const fs = require('fs');
-const mustache = require('mustache');
+const handlebars = require('handlebars');
 const program = require('commander');
 
 const { getQueues } = require('./fileParser');
@@ -13,10 +13,8 @@ program
     const files = [dir, ...otherDirs];
     const results = await Promise.all(files.map(async f => await getQueues(f)));
     const queues = [...new Set(results.flat(1))];
-    // fs.writeFileSync('./elasticmq.conf', mustache.render(elasticmq, { queues }));
-    // fs.writeFileSync('./sqs-insight.conf', mustache.render(sqs, { queues }));
-    fs.writeFileSync('/home/chris/docker/alpine-sqs/elasticmq.conf', mustache.render(elasticmq, { queues }));
-    fs.writeFileSync('/home/chris/docker/alpine-sqs/sqs-insight.conf', mustache.render(sqs, { queues }));
+    fs.writeFileSync('/home/chris/docker/alpine-sqs/elasticmq.conf', handlebars.compile(elasticmq)({ queues }));
+    fs.writeFileSync('/home/chris/docker/alpine-sqs/sqs-insight.conf', handlebars.compile(sqs)({ queues }));
     console.log('done');
   });
 
