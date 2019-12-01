@@ -9,7 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "commander": "^2.20.0",
+    "commander": "^4.0.1",
+    "mustache": "^3.1.0",
     "read-line-file": "^1.0.6"
   }
 }
